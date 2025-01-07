@@ -2,7 +2,7 @@
 
 <template>
     <h1>Apotek 24/7</h1>
-    <form>
+    <form @submit.prevent="RegisterUser()">
         <label for="firstname">Förnamn:</label><br>
         <input v-model="firstname" type="text" name="firstname" id="firstname"><br>
 
@@ -27,11 +27,47 @@
 export default {
     data() {
         return {
-            firstname: "koppling", 
-            lastname: "test", 
-            email: "att", 
-            username: "det", 
-            password: "funkar"
+            firstname: "", 
+            lastname: "", 
+            email: "", 
+            username: "", 
+            password: ""
+        }
+    }, 
+    methods: {
+        async RegisterUser() {
+            if(this.firstname || this.lastname || this.email || this.username || this.password > 2) {
+                
+                let newUserBody = {
+                    first_name: this.firstname, 
+                    last_name: this.lastname, 
+                    email: this.email, 
+                    user_name: this.username, 
+                    user_password: this.password
+                }
+                
+                
+                const response = await fetch ("http://localhost:3000/adduser", {
+                    method: "POST", 
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-type":"application/json"
+                    }, 
+                    body: JSON.stringify(newUserBody)
+                }); 
+
+                const data = await response.json(); 
+                
+                //för test
+                console.log(data); 
+
+                this.firstname = ""
+                this.lastname = ""
+                this.email = ""
+                this.username = ""
+                this.password = ""
+                
+            }
         }
     }
 }
