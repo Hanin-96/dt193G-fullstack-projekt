@@ -50,6 +50,7 @@ export default {
                 
                 if (response.ok) {
                     console.log("Inloggning lyckades!");
+                    this.$router.push({name:'admin'});
                     this.errorMsg = "";
                 } else {
                     this.errorMsg = "Fel Användarnamn/Lösenord";
