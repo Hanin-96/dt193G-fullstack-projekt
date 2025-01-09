@@ -6,7 +6,7 @@
             <MainContent>
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
                 <div class="bg-white p-4 mx-4 relative top-10 max-w-80">
-                    <Product v-for="product in products" :product="product" :key="product._id" />
+                    <Product @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort"/>
                 </div>
                 
             </MainContent>
@@ -45,6 +45,22 @@ export default {
             console.log(data); 
 
             this.products = data;
+        }, 
+
+        //funktion för att radera produkter
+        async deleteProduct(id) {
+            let response = await fetch("http://localhost:3000/product/" + id, {
+                method: "DELETE", 
+                headers: {
+                    "Accept": "application/json", 
+                    "Content-type": "application/json"
+
+                }
+            });
+
+            let data = await response.json(); 
+            
+            this.getProducts(); 
         }
     }, 
 
@@ -53,3 +69,13 @@ export default {
     }
 }
 </script>
+
+<style>
+.produktkort {
+    background-color: #f8f8f8; 
+    border-radius: 5px; 
+    box-shadow: 2px 2px 0 #35353580; 
+    margin-bottom: 1em; 
+    padding: 1em; 
+}
+</style>
