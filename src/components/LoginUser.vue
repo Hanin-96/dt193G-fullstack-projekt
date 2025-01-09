@@ -2,7 +2,7 @@
 
 <template>
     <div class="form-login max-w-sm w-full mx-auto">
-        <LogoImg />
+        <LogoImg class="mx-auto mt-4 mb-4"/>
         <h1 class="bg-white text-dark-grey-text p-4 text-center mb-0 text-4xl">Apotek 24/7</h1>
             <form @submit.prevent="loginUser()" class="bg-light-green text-dark-grey-text p-8 mx-auto shadow-xl rounded-bl-lg rounded-br-lg">
 
@@ -10,7 +10,7 @@
                 <input v-model="userBody.username" type="text" name="username" id="username" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6"><br> 
 
                 <label for="password" class="text-base">Lösenord:</label><br>
-                <input v-model="userBody.password" type="text" name="password" id="password" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-2"><br>
+                <input v-model="userBody.password" type="password" name="password" id="password" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-2"><br>
                 <br>
                 <div class="error-msg mb-2" v-if="errorMsg != ''">
                     <p>{{errorMsg}}</p>
@@ -32,7 +32,6 @@ export default {
     name: "LoginUser",
     data() {
         return {
-            LogoImg,
             userBody: {
                 username: '',
                 password: ''

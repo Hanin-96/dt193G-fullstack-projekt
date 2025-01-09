@@ -2,7 +2,7 @@
 
 <template>
     <div class="form-login max-w-sm w-full mx-auto">
-        <LogoImg />
+        <LogoImg class="mx-auto mt-4 mb-4"/>
         <h1 class="bg-white text-dark-grey-text p-4 text-center mb-0 text-4xl">Apotek 24/7</h1>
         <form @submit.prevent="RegisterUser()" class="bg-light-green text-dark-grey-text p-8 mx-auto shadow-xl rounded-bl-lg rounded-br-lg">
             <label for="firstname" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Förnamn:</label><br>
@@ -22,7 +22,7 @@
             <br>
             <input type="submit" value="Registrera" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full"><br>
         </form>
-        <div class="mt-1 p-2 text-white underline text-right">
+        <div class="mt-1 p-2 text-white underline text-left">
             <RouterLink to="/login">Logga in</RouterLink>
         </div>
     </div>

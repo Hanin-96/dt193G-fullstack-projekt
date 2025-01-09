@@ -1,7 +1,7 @@
 <!--Komponent med formulär för att logga in som användare-->
 
 <template>
-        <img :src="imgLogo" alt="logotyp" class="img-logo w-full">
+        <img :src="imgLogo" alt="logotyp" class="img-logo w-full max-w-40">
 </template>
 
 <script>
@@ -19,10 +19,6 @@ export default {
 <style scoped>
 
 .img-logo {
-    max-width: 10rem;
     display: block;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
 }
 </style>
