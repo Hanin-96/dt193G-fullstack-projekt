@@ -1,30 +1,40 @@
 <!--Komponent med formulär för att lägga till ny användare-->
 
 <template>
-    <h1>Apotek 24/7</h1>
-    <form @submit.prevent="RegisterUser()">
-        <label for="firstname">Förnamn:</label><br>
-        <input v-model="firstname" type="text" name="firstname" id="firstname"><br>
+    <div class="form-login max-w-sm w-full mx-auto">
+        <LogoImg />
+        <h1 class="bg-white text-dark-grey-text p-4 text-center mb-0 text-4xl">Apotek 24/7</h1>
+        <form @submit.prevent="RegisterUser()" class="bg-light-green text-dark-grey-text p-8 mx-auto shadow-xl rounded-bl-lg rounded-br-lg">
+            <label for="firstname" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Förnamn:</label><br>
+            <input v-model="firstname" type="text" name="firstname" id="firstname" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6"><br>
 
-        <label for="lastname">Efternamn:</label><br>
-        <input v-model="lastname" type="text" name="lastnamn" id="lastname"><br> 
+            <label for="lastname" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Efternamn:</label><br>
+            <input v-model="lastname" type="text" name="lastnamn" id="lastname" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6"><br> 
 
-        <label for="email">Epost:</label><br>
-        <input v-model="email" type="text" name="email" id="email"><br> 
+            <label for="email" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Epost:</label><br>
+            <input v-model="email" type="text" name="email" id="email" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6"><br> 
 
-        <label for="username">Användarnamn:</label><br>
-        <input v-model="username" type="text" name="username" id="username"><br> 
+            <label for="username" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Användarnamn:</label><br>
+            <input v-model="username" type="text" name="username" id="username" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6"><br> 
 
-        <label for="password">Lösenord:</label><br>
-        <input v-model="password" type="text" name="password" id="password"><br>
-        <br>
-        <input type="submit" value="Registrera"><br>
-
-    </form>
+            <label for="password" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Lösenord:</label><br>
+            <input v-model="password" type="text" name="password" id="password" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-2"><br>
+            <br>
+            <input type="submit" value="Registrera" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full"><br>
+        </form>
+        <div class="mt-1 p-2 text-white underline text-right">
+            <RouterLink to="/login">Logga in</RouterLink>
+        </div>
+    </div>
 </template>
 
 <script>
+import LogoImg from './LogoImg.vue';
+
 export default {
+    components: {
+        LogoImg
+    },
     data() {
         return {
             firstname: "", 
@@ -74,22 +84,5 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    background-color: #ffffff;
-    color: #353535; 
-    padding: 1em; 
-    text-align: center;
-} 
 
-input {
-    width: 355px; 
-    max-width: 100%;
-    margin: 0 auto; 
-    padding: 1em; 
-    border-radius: 5px;
-} 
-
-form {
-    color: #353535; 
-}
 </style>

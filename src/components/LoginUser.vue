@@ -1,7 +1,7 @@
 <!--Komponent med formulär för att logga in som användare-->
 
 <template>
-    <div class="form-login max-w-md w-full mx-auto">
+    <div class="form-login max-w-sm w-full mx-auto">
         <LogoImg />
         <h1 class="bg-white text-dark-grey-text p-4 text-center mb-0 text-4xl">Apotek 24/7</h1>
             <form @submit.prevent="loginUser()" class="bg-light-green text-dark-grey-text p-8 mx-auto shadow-xl rounded-bl-lg rounded-br-lg">
@@ -10,13 +10,16 @@
                 <input v-model="userBody.username" type="text" name="username" id="username" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6"><br> 
 
                 <label for="password" class="text-base">Lösenord:</label><br>
-                <input v-model="userBody.password" type="text" name="password" id="password" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6"><br>
+                <input v-model="userBody.password" type="text" name="password" id="password" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-2"><br>
                 <br>
-                <div class="error-msg" v-if="errorMsg != ''">
+                <div class="error-msg mb-2" v-if="errorMsg != ''">
                     <p>{{errorMsg}}</p>
                 </div>
                 <input type="submit" value="Logga in" id="submit-btn" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full"><br>
         </form>
+        <div class="mt-1 p-2 text-white underline text-right">
+            <RouterLink to="/register">Registrera ny användare</RouterLink>
+        </div>
     </div>
 </template>
 
@@ -68,11 +71,4 @@ export default {
 
 <style scoped>
 
-.img-logo {
-    max-width: 10rem;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-}
 </style>
