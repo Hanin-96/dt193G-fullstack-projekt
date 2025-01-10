@@ -19,7 +19,7 @@
 import MainContent from '@/components/MainContent.vue';
 import HeaderComponent from '../components/Header.vue'
 import LogoImg from '@/components/LogoImg.vue';
-import Product from '@/components/product.vue'; 
+import Product from '@/components/Product.vue'; 
 
 export default {
     //tom array för att läsa in produkter
@@ -38,7 +38,7 @@ export default {
     methods: {
         //Funktion för att hämta in data
         async getProducts() {
-            let response = await fetch("http://localhost:3000/product"); //används för testning
+            let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product"); //används för testning
 
             let data = await response.json(); 
 
@@ -49,7 +49,7 @@ export default {
 
         //funktion för att radera produkter
         async deleteProduct(id) {
-            let response = await fetch("http://localhost:3000/product/" + id, {
+            let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product/" + id, {
                 method: "DELETE", 
                 headers: {
                     "Accept": "application/json", 

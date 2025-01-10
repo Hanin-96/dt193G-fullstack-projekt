@@ -42,7 +42,7 @@ export default {
     methods: {
         async loginUser() {
             try {
-                const response = await fetch('http://localhost:3000/login', {
+                const response = await fetch('https://projekt-webbtjanst-api-hanin-96.onrender.com/login', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json",

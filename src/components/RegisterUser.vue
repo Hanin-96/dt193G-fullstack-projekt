@@ -57,7 +57,7 @@ export default {
                 }
                 
                 
-                const response = await fetch ("http://localhost:3000/adduser", {
+                const response = await fetch ("https://projekt-webbtjanst-api-hanin-96.onrender.com/adduser", {
                     method: "POST", 
                     headers: {
                         "Accept": "application/json",
