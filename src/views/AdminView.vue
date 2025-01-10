@@ -6,7 +6,7 @@
             <MainContent>
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
                 <div class="bg-white p-4 mx-4 relative top-10 max-w-80">
-                    <Product @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort"/>
+                    <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort"/>
                 </div>
                 
             </MainContent>
@@ -19,7 +19,7 @@
 import MainContent from '@/components/MainContent.vue';
 import HeaderComponent from '@/components/Header.vue'
 import LogoImg from '@/components/LogoImg.vue';
-import Product from '@/components/Product.vue';
+import Products from '@/components/Products.vue';
 
 export default {
     //tom array för att läsa in produkter
@@ -33,7 +33,7 @@ export default {
         HeaderComponent,
         MainContent,
         LogoImg, 
-        Product
+        Products
     }, 
     methods: {
         //Funktion för att hämta in data
