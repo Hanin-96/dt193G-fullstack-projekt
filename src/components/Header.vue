@@ -9,7 +9,7 @@
                     <RouterLink to="/admin">Lagerhantering</RouterLink>
                     </li>
                     <li class="p-4">
-                    <RouterLink to="/logout">Logga ut</RouterLink>
+                    <RouterLink><button @click="logOut">Logga ut</button></RouterLink>
                     </li>
                 </ul>
             </nav>
@@ -22,7 +22,23 @@
 import { RouterLink } from 'vue-router';
 
 export default {
-    
+    methods: {
+        async logOut() {
+            try {
+                let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/admin/logout", {
+                    method: 'GET',
+                    credentials: 'include', 
+                })
+
+                console.log(response); 
+                
+                this.$router.push({name:"logout"}); 
+
+            } catch(err) {
+                console.log(err).message("Utloggning misslyckades").code(500); 
+            }
+        }
+    }
 }
 
 

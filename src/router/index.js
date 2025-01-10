@@ -29,6 +29,7 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
+      meta: { isAuthenticated : true},
       component: AdminView
     },
     {
@@ -41,5 +42,27 @@ const router = createRouter({
     }
   ],
 })
+
+router.beforeEach(async (to, from, next) => {
+  if(to.meta.isAuthenticated) {
+    try {
+      const response = await fetch('https://projekt-webbtjanst-api-hanin-96.onrender.com/admin', {
+        credentials: 'include'
+      })
+
+      if(response.ok) {
+        next() 
+      } else {
+        next("/login")
+      }
+
+    } catch(error) {
+      next("/login")
+    }
+  } else {
+    next(); //är inte skyddad. Går bara vidare.
+  }
+});
+
 
 export default router
