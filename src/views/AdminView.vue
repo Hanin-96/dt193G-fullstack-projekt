@@ -17,9 +17,9 @@
 
 <script>
 import MainContent from '@/components/MainContent.vue';
-import HeaderComponent from '../components/Header.vue'
+import HeaderComponent from '@/components/Header.vue'
 import LogoImg from '@/components/LogoImg.vue';
-import Product from '@/components/Product.vue'; 
+import Product from '@/components/Product.vue';
 
 export default {
     //tom array för att läsa in produkter
