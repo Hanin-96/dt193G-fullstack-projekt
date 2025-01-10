@@ -38,7 +38,9 @@ export default {
     methods: {
         //Funktion för att hämta in data
         async getProducts() {
-            let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product"); //används för testning
+            let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product", {
+                credentials: 'include' //VIKTIGT FÖR COOKIES
+            }); //används för testning
 
             let data = await response.json(); 
 
@@ -55,7 +57,8 @@ export default {
                     "Accept": "application/json", 
                     "Content-type": "application/json"
 
-                }
+                }, 
+                credentials: 'include'
             });
 
             let data = await response.json(); 

@@ -48,7 +48,7 @@ export default {
                         "Accept": "application/json",
                         "Content-type": "application/json"
                     },
-                    credentials: 'include',
+                    //credentials: 'include',
                     body: JSON.stringify({ user_name: this.userBody.username, user_password: this.userBody.password })
                 });
 
