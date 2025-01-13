@@ -1,14 +1,14 @@
 <template>
-    <div class="flex flex-col justify-center max-w-4xl w-full mx-auto gap-4 p-4 md:flex-row md:items-start items-center md:mt-20 mt-0">
+    <div class="flex flex-col justify-center max-w-7xl w-full mx-auto gap-4 p-4 xl:flex-row xl:items-start items-center lg:mt-20 mt-0">
         <LogoImg class="max-w-20"/>
-        <div class="w-full max-w-4xl">
+        <div class="w-full max-w-7xl">
             <HeaderComponent />
-            <div class="main-content-wrap flex h-min bg-light-green w-full max-w-4xl mx-auto pb-20 justify-between">
+            <div class="main-content-wrap flex h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
-                    <div class="p-4 relative top-10 max-w-80">
-                    <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl"/>
+                    <div class="p-4 relative top-10 max-w-xl">
+                    <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
                     </div>
-                <PostProduct />
+                <PostProduct @addedProductCallback="getProducts()" class="max-w-2xl w-full"/>
             </div>
 
         </div>
@@ -40,6 +40,7 @@ export default {
         //Funktion för att hämta in data
         async getProducts() {
             let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product", {
+                method: "GET",
                 credentials: 'include' //VIKTIGT FÖR COOKIES
             }); //används för testning
 
@@ -77,8 +78,7 @@ export default {
 <style>
 .produktkort {
     background-color: #f8f8f8; 
-    border-radius: 5px; 
-    margin-bottom: 1em; 
-    padding: 1em; 
+    margin-bottom: 1rem; 
+    padding: 1rem; 
 }
 </style>

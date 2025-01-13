@@ -2,7 +2,7 @@
 
 <template>
 
-<form @submit.prevent="addNewProduct()" @submit="checkForm" class="bg-white text-dark-grey-text mt-14 p-4 w-fit shadow-xl rounded-bl-lg rounded-br-lg mr-4">
+<form @submit.prevent="addNewProduct()" @submit="checkForm" class="bg-white text-dark-grey-text mt-14 p-4 shadow-xl rounded-lg mr-4 h-fit">
     <fieldset class="mb-4 text-lg font-bold">Lägg till/uppdatera produkt</fieldset>
     <label for="name" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Namn:</label><br>
     <input v-model="item.productName" type="text" name="name" id="name" class="max-w-full w-full mx-auto my-0 p-1 rounded-lg mt-2 mb-6"><br>
@@ -36,7 +36,11 @@
         <p>{{errorMsg}}</p>
         <br>
     </div>
-    <input type="submit" value="Lägg till produkt" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full border-none">
+
+    <div class="btn-submit-cancel-wrap flex flex-col lg:flex-row gap-4">
+        <button type="submit" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full submit-btn">Lägg till</button>
+        <button @click="resetForm($event)" type="button" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-orange text-dark-grey-text font-semibold shadow-md cursor-pointer w-full submit-btn">Ångra</button>
+    </div>
 
     <br>
 </form>
@@ -59,6 +63,7 @@ export default {
             errorMsg: ""
         }
     },
+    emits: ['addedProductCallback'],
     methods: {
         async addNewProduct() {
 
@@ -87,7 +92,10 @@ export default {
                 
                 if (response.ok) {
                     console.log("Det gick att lagra ny produkt");
+                    this.$emit('addedProductCallback');
+                    this.resetForm();
                     this.errorMsg = "";
+
                 } else {
                     this.errorMsg = "Det gick inte att lagra produkt";
                 }
@@ -96,10 +104,22 @@ export default {
             }
 
             }
-
-
             console.log(this.item);
         },
+        resetForm(event) {
+
+            if(event) {
+                event.preventDefault();
+            } 
+
+                this.item.productName= "",
+                this.item.productDescription= "",
+                this.item.productCategories= [],
+                this.item.productAmount= 0,
+                this.item.productPrice= 0
+            
+        },
+
         async getAllCategories() {
             let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/categories", {
                 credentials: 'include' //VIKTIGT FÖR COOKIES
@@ -123,5 +143,13 @@ export default {
 </script>
 
 <style scoped>
+
+input, textarea {
+    border: 1px solid #004200;
+}
+
+.submit-btn {
+    border: none;
+}
 
 </style>
