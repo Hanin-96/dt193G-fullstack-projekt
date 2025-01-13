@@ -3,23 +3,24 @@
         <LogoImg class="max-w-20"/>
         <div class="w-full max-w-4xl">
             <HeaderComponent />
-            <MainContent>
+            <div class="main-content-wrap flex h-min bg-light-green w-full max-w-4xl mx-auto pb-20 justify-between">
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
-                <div class="p-4 mx-4 relative top-10 max-w-80">
-                    <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort"/>
-                </div>
-                
-            </MainContent>
+                    <div class="p-4 relative top-10 max-w-80">
+                    <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl"/>
+                    </div>
+                <PostProduct />
+            </div>
+
         </div>
     </div>
 
 </template>
 
 <script>
-import MainContent from '@/components/MainContent.vue';
 import HeaderComponent from '@/components/Header.vue'
 import LogoImg from '@/components/LogoImg.vue';
 import Products from '@/components/Products.vue';
+import PostProduct from '@/components/PostProduct.vue';
 
 export default {
     //tom array för att läsa in produkter
@@ -31,9 +32,9 @@ export default {
     //hämtar in komponent för login
     components: {
         HeaderComponent,
-        MainContent,
         LogoImg, 
-        Products
+        Products,
+        PostProduct
     }, 
     methods: {
         //Funktion för att hämta in data
@@ -77,7 +78,6 @@ export default {
 .produktkort {
     background-color: #f8f8f8; 
     border-radius: 5px; 
-    box-shadow: 2px 2px 0 #35353580; 
     margin-bottom: 1em; 
     padding: 1em; 
 }
