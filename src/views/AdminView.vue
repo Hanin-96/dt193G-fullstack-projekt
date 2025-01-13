@@ -1,11 +1,11 @@
 <template>
-    <div class="flex justify-center max-w-4xl w-full mx-auto items-start gap-4">
-        <LogoImg class="max-w-20 mt-20"/>
+    <div class="flex flex-col justify-center max-w-4xl w-full mx-auto gap-4 p-4 md:flex-row md:items-start items-center md:mt-20 mt-0">
+        <LogoImg class="max-w-20"/>
         <div class="w-full max-w-4xl">
             <HeaderComponent />
             <MainContent>
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
-                <div class="bg-white p-4 mx-4 relative top-10 max-w-80">
+                <div class="p-4 mx-4 relative top-10 max-w-80">
                     <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort"/>
                 </div>
                 

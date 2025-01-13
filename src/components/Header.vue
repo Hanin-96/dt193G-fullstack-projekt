@@ -2,7 +2,7 @@
 
 <template>
     <div class="header-wrap">
-        <header class="w-full max-w-4xl mt-20 mx-auto">
+        <header class="w-full max-w-4xl mx-auto">
             <nav class="bg-white">
                 <ul class="flex justify-between">
                     <li class="bg-light-green p-4">
