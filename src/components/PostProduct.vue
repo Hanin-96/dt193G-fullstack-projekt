@@ -220,6 +220,7 @@ export default {
                     })
                 }); 
 
+                this.isLoading = false; 
                 let data = await response.json(); 
                 
                 if(response.ok) {
