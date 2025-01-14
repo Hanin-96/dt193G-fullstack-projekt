@@ -6,10 +6,14 @@
             <div class="main-content-wrap flex h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
                     <div class="p-4 relative top-10 max-w-xl">
-                    <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
+                        <div class="product-">
+                        <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
+                        <LoadingSpinner :loadingSpinner="isLoading" />
+                        </div>
                     </div>
                 <PostProduct @addedProductCallback="getProducts()" class="max-w-2xl w-full"/>
             </div>
+            <LoadingSpinner :loadingSpinner="isLoading" />
 
         </div>
     </div>
@@ -21,12 +25,14 @@ import HeaderComponent from '@/components/Header.vue'
 import LogoImg from '@/components/LogoImg.vue';
 import Products from '@/components/Products.vue';
 import PostProduct from '@/components/PostProduct.vue';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
 
 export default {
     //tom array för att läsa in produkter
     data() {
         return {
-            products: []
+            products: [],
+            isLoading: false
         }
     },
     //hämtar in komponent för login
@@ -34,16 +40,19 @@ export default {
         HeaderComponent,
         LogoImg, 
         Products,
-        PostProduct
+        PostProduct,
+        LoadingSpinner
     }, 
     methods: {
         //Funktion för att hämta in data
         async getProducts() {
+            this.isLoading = true;
             let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product", {
                 method: "GET",
                 credentials: 'include' //VIKTIGT FÖR COOKIES
             }); //används för testning
 
+            this.isLoading = false;
             let data = await response.json(); 
 
             console.log(data); 
@@ -53,6 +62,7 @@ export default {
 
         //funktion för att radera produkter
         async deleteProduct(id) {
+            this.isLoading = true;
             let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product/" + id, {
                 method: "DELETE", 
                 headers: {
@@ -62,7 +72,7 @@ export default {
                 }, 
                 credentials: 'include'
             });
-
+            this.isLoading = false;
             let data = await response.json(); 
             
             this.getProducts(); 

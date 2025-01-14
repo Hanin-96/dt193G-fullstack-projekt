@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import LoginUserComponent from '../components/LoginUser.vue'
+import LoginUserComponent from '../components/LoginUser.vue';
 
 export default {
     //hämtar in komponent för login
     components: {
-        LoginUserComponent
-    }
+        LoginUserComponent,
+    },
 }
 </script>
 

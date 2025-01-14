@@ -22,6 +22,7 @@
             <br>
             <input type="submit" value="Registrera" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full"><br>
         </form>
+        <loading-spinner :loadingSpinner="isLoading" />
         <div class="mt-1 p-2 text-white underline text-left">
             <RouterLink to="/login">Logga in</RouterLink>
         </div>
@@ -30,10 +31,12 @@
 
 <script>
 import LogoImg from './LogoImg.vue';
+import LoadingSpinner from './LoadingSpinner.vue';
 
 export default {
     components: {
-        LogoImg
+        LogoImg,
+        LoadingSpinner
     },
     data() {
         return {
@@ -41,11 +44,14 @@ export default {
             lastname: "", 
             email: "", 
             username: "", 
-            password: ""
+            password: "",
+            isLoading: false
         }
     }, 
     methods: {
         async RegisterUser() {
+            this.isLoading = true;
+
             if(this.firstname || this.lastname || this.email || this.username || this.password > 2) {
                 
                 let newUserBody = {
