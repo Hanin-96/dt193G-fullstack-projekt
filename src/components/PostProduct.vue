@@ -214,7 +214,7 @@ export default {
                     body: JSON.stringify({
                         product_name: this.item.productName, 
                         description: this.item.productDescription, 
-                        category: this.item.category_name, 
+                        category: this.item.productCategories, 
                         amount: this.item.productAmount, 
                         price: this.item.productPrice
                     })
