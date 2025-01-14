@@ -3,7 +3,7 @@
 <template>
 
 <form @submit.prevent="addNewProduct()" @submit="checkForm" class="bg-white text-dark-grey-text mt-14 p-4 shadow-xl rounded-lg mr-4 h-fit">
-    <fieldset class="mb-4 text-lg font-bold">Lägg till/uppdatera produkt</fieldset>
+    <fieldset class="mb-4 text-lg font-bold">{{ item.productId ? 'Uppdatera produkt' : 'Lägg till produkt' }}</fieldset>
 
     <label for="name" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Namn:</label><br>
     <span class="error-form-wrap" v-if="errorMsg.productName">
@@ -51,7 +51,7 @@
     <br>
 
     <div class="btn-submit-cancel-wrap flex flex-col lg:flex-row gap-4">
-        <button type="submit" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full submit-btn">Lägg till</button>
+        <button type="submit" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full submit-btn">{{ item.productId ? 'Uppdatera' : 'Lägg till' }}</button>
         <button @click="resetForm($event)" type="button" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-orange text-dark-grey-text font-semibold shadow-md cursor-pointer w-full submit-btn">Ångra</button>
     </div>
 
@@ -66,6 +66,7 @@ export default {
         return {
             options: [],
             item: {
+                productId: null,
                 productName: "",
                 productDescription: "",
                 productCategories: [],
@@ -91,6 +92,10 @@ export default {
                 return;
             }
 
+            //om det finns ett id så skickas den till updateProduct annars fortsätter post anropet
+            if(this.item.productId) {
+                await this.updateProduct(this.item.productId); 
+            } else {
                 //Skicka värden till databasen
                 try {
                 const response = await fetch('https://projekt-webbtjanst-api-hanin-96.onrender.com/product', {
@@ -118,6 +123,7 @@ export default {
             }
 
             //console.log(this.item);
+            }
         },
         validateForm() {
         //Validering av formuläret för produkt
@@ -151,7 +157,7 @@ export default {
             if(event) {
                 event.preventDefault();
             } 
-
+                this.item.productId= null,
                 this.item.productName= "",
                 this.item.productDescription= "",
                 this.item.productCategories= [],
@@ -171,9 +177,53 @@ export default {
 
             this.options = data;
 
+        }, 
+
+        //Funktion för att uppdatera produkt med formuläret
+        async updateProduct(id) {
+
+            try {
+                let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/product/" + id, {
+                    method: "PUT", 
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-type":"application/json"
+                    }, 
+                    credentials: 'include', //VIKTIG FÖR COOKIES
+                    body: JSON.stringify({
+                        product_name: this.item.productName, 
+                        description: this.item.productDescription, 
+                        category: this.item.category_name, 
+                        amount: this.item.productAmount, 
+                        price: this.item.productPrice
+                    })
+                }); 
+
+                let data = await response.json(); 
+                
+                if(response.ok) {
+                    console.log("Produkten är uppdaterad");
+                    this.$emit("addedProductCallback") //uppdaterar formuläret efter uppdatering
+                    this.resetForm();
+                }
+
+            } catch(error) {
+                this.errorMsg = "Något gick fel vid uppdateringen"; 
+            }
+        }, 
+
+        //funktion för att populera formuläret med rätt data från produkt
+        populateForm(product) {
+            this.item.productId = product._id;
+            this.item.productName = product.product_name; 
+            this.item.productDescription = product.description; 
+            this.item.productCategories = product.category.map(c => c._id); //hämta kategoriers id
+            this.item.productAmount = product.amount; 
+            this.item.productPrice = product.price; 
         }
 
     },
+
     mounted() {
         this.getAllCategories();
     }

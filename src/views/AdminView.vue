@@ -6,9 +6,9 @@
             <div class="main-content-wrap flex h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
                     <div class="p-4 relative top-10 max-w-xl">
-                    <Products @deleteProduct="deleteProduct(product._id)" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
+                    <Products @deleteProduct="deleteProduct(product._id)" @updateProduct="handleUpdateProduct" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
                     </div>
-                <PostProduct @addedProductCallback="getProducts()" class="max-w-2xl w-full"/>
+                <PostProduct ref="postProductForm" @addedProductCallback="getProducts()" class="max-w-2xl w-full"/>
             </div>
 
         </div>
@@ -66,7 +66,12 @@ export default {
             let data = await response.json(); 
             
             this.getProducts(); 
-        }
+        }, 
+
+        // lägger in data från produkt som ska uppdateras i formuläret postproduct
+        handleUpdateProduct(product) {
+        this.$refs.postProductForm.populateForm(product); 
+        },
     }, 
 
     mounted() {

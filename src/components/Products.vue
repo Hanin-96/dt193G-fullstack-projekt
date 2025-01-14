@@ -11,7 +11,7 @@
         <p>Antal: {{ product.amount }}</p>
         <p>Pris: {{ product.price }}</p>
         <div class="btn-products-wrap flex gap-4">
-            <button class="bg-light-yellow text-dark-grey-text font-bold py-2 px-4 rounded w-full mt-6">Uppdatera</button> 
+            <button @click="$emit('updateProduct', product)" class="bg-light-yellow text-dark-grey-text font-bold py-2 px-4 rounded w-full mt-6">Uppdatera</button> 
             <button @click="$emit('deleteProduct')" class="bg-orange text-dark-grey-text font-bold py-2 px-4 rounded w-full mt-6">Radera <i class="fa-solid fa-trash" style="color: #353535;"></i></button>
         </div>
     </article>
