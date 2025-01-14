@@ -1,6 +1,9 @@
 <template>
     <div class="flex flex-col justify-center max-w-7xl w-full mx-auto gap-4 p-4 xl:flex-row xl:items-start items-center lg:mt-20 mt-0">
-        <LogoImg class="max-w-20"/>
+        <div class="logo-title-wrap flex flex-col items-center text-white">
+            <LogoImg class="max-w-20"/>
+            <h1>Apotek 24/7</h1>
+        </div>
         <div class="w-full max-w-7xl">
             <HeaderComponent />
             <div class="main-content-wrap flex h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
