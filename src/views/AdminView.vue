@@ -59,6 +59,7 @@ export default {
             let data = await response.json(); 
 
             console.log(data); 
+            //Sortera data efter alfabetisk ordning
             let sortedData = data;
             sortedData = sortedData.sort((a, b) => {
                 let titleA = a.product_name
