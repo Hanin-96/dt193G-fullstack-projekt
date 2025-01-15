@@ -59,6 +59,18 @@ export default {
             let data = await response.json(); 
 
             console.log(data); 
+            let sortedData = data;
+            sortedData = sortedData.sort((a, b) => {
+                let titleA = a.product_name
+                let titleB = b.product_name
+                if (titleA < titleB) {
+                    return -1;
+                }
+                if (titleA > titleB) {
+                    return 1;
+                }
+                return 0;
+            })
 
             this.products = data;
         }, 
