@@ -93,6 +93,10 @@ export default {
     },
     emits: ['addedProductCallback'],
     methods: {
+        //Scrolla till toppen
+        scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
         async addNewProduct() {
             //LoadingSpinner
             this.isLoading = true;
@@ -242,6 +246,7 @@ export default {
             this.item.productCategories = product.category.map(c => c._id); //hämta kategoriers id
             this.item.productAmount = product.amount; 
             this.item.productPrice = product.price; 
+            this.scrollToTop();
         }
 
     },

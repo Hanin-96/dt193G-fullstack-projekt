@@ -9,8 +9,9 @@
             <div class="main-content-wrap flex h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
                     <div class="p-4 relative top-10 max-w-xl">
+                        <input type="search" class="bg-white w-full mb-4 p-2 rounded-lg" placeholder="Sök" @input="onFilterSearch" v-model="searchValue" />
                         <div class="product-">
-                        <Products @deleteProduct="deleteProduct(product._id)" @updateProduct="handleUpdateProduct" v-for="product in products" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
+                        <Products @deleteProduct="deleteProduct(product._id)" @updateProduct="handleUpdateProduct" v-for="product in filteredProducts" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
                         <LoadingSpinner :loadingSpinner="isLoading" />
                         </div>
                     </div>
@@ -35,7 +36,9 @@ export default {
     data() {
         return {
             products: [],
-            isLoading: false
+            filteredProducts: [],
+            isLoading: false,
+            searchValue: ""
         }
     },
     //hämtar in komponent för login
@@ -74,7 +77,21 @@ export default {
             })
 
             this.products = data;
+            this.filteredProducts = this.products;
         }, 
+        //Searchbar för filtrering av produkter efter produktnamn
+        onFilterSearch(event) {
+            this.searchValue = event.target.value;
+            if( this.searchValue.trim()==="") {
+                this.filteredProducts = this.products;
+                return;
+            } else {
+            this.filteredProducts = this.products.filter((product) => {
+                return product.product_name.toLowerCase().includes( this.searchValue.toLowerCase());
+            });
+            }
+            
+        },
 
         //funktion för att radera produkter
         async deleteProduct(id) {
