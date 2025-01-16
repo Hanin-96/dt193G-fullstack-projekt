@@ -148,8 +148,8 @@ export default {
 
         //filtereing på kategori
         filterByCategory() {
-            console.log("kategori:" + this.selectedCategory); //visar kategorins namn
-            if(this.selectedCategory === "") {
+            //console.log("kategori:" + this.selectedCategory); //visar kategorins namn
+            if(this.selectedCategory.length === 0) {
                 this.filteredProducts = this.products;
             } else {
                 //filtrerar produkter baserat på selectedCategory. loopar igenom kategoriarr i produkten
