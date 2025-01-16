@@ -36,11 +36,11 @@ router.beforeEach(async (to, from, next) => {
       if(response.ok) {
         next() 
       } else {
-        next("/login")
+        next("/")
       }
 
     } catch(error) {
-      next("/login")
+      next("/")
     }
   } else {
     next(); //är inte skyddad. Går bara vidare.
