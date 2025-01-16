@@ -6,9 +6,9 @@
         </div>
         <div class="w-full max-w-7xl">
             <HeaderComponent />
-            <div class="main-content-wrap flex h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
+            <div class="main-content-wrap flex flex-col-reverse lg:flex-row h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
-                    <div class="p-4 relative top-10 max-w-xl">
+                    <div class="p-4 relative top-10 max-w-xl m-auto">
                         <input type="search" class="bg-white w-full mb-4 p-2 rounded-lg" placeholder="Sök efter produkt" @input="onFilterSearch" v-model="searchValue" />
                         <p v-if="filteredProducts.length === 0" class="searchResult">{{ errorSearchMsg }}</p>
                         <div class="product-">

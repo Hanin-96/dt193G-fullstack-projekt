@@ -2,7 +2,7 @@
 
 <template>
 
-<div class="product-form-wrap bg-white text-dark-grey-text mt-14 p-4 shadow-xl rounded-lg mr-4 h-fit">
+<div class="product-form-wrap bg-white text-dark-grey-text mt-14 p-4 shadow-xl rounded-lg m-auto lg:mr-4 h-fit">
 <form @submit.prevent="addNewProduct()" @submit="checkForm">
         <fieldset class="mb-4 text-lg font-bold">{{ item.productId ? 'Uppdatera produkt' : 'Lägg till produkt' }}</fieldset>
 
