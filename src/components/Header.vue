@@ -9,7 +9,7 @@
                     <RouterLink to="/admin">Lagerhantering</RouterLink>
                     </li>
                     <li class="p-4">
-                    <RouterLink><button @click="logOut">Logga ut</button></RouterLink>
+                    <RouterLink to="/"><button @click="logOut">Logga ut</button></RouterLink>
                     </li>
                 </ul>
             </nav>
@@ -30,9 +30,9 @@ export default {
                     credentials: 'include', 
                 })
 
-                console.log(response); 
+                //console.log(response); 
                 
-                this.$router.push({name:"logout"}); 
+                this.$router.push({name:"login"}); 
 
             } catch(err) {
                 console.log(err).message("Utloggning misslyckades").code(500); 
