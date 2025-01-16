@@ -11,6 +11,13 @@
                     <div class="p-4 relative top-10 max-w-xl mx-auto">
                         <input type="search" class="bg-white w-full mb-4 p-2 rounded-lg" placeholder="Sök efter produkt" @input="onFilterSearch" v-model="searchValue" />
                         <p v-if="filteredProducts.length === 0" class="searchResult">{{ errorSearchMsg }}</p>
+                        <!--Filtrering på kategori-->
+                        <select v-model="selectedCategory" @change="filterByCategory" class="bg-white w-full mb-4 p-2 rounded-lg">
+                            <option value="">Alla kategorier</option>
+                            <option v-for="category in categories" :key="category._id" :value="category.category_name">
+                                {{ category.category_name }}
+                            </option>
+                        </select>
                         <div class="product-">
                         <Products @deleteProduct="deleteProduct(product._id)" @updateProduct="handleUpdateProduct" v-for="product in filteredProducts" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
                         <LoadingSpinner :loadingSpinner="isLoading" />
@@ -40,7 +47,9 @@ export default {
             filteredProducts: [],
             isLoading: false,
             searchValue: "",
-            errorSearchMsg: ""
+            errorSearchMsg: "", 
+            categories: [],
+            selectedCategory: ""
         }
     },
     //hämtar in komponent för login
@@ -123,11 +132,37 @@ export default {
         // lägger in data från produkt som ska uppdateras i formuläret postproduct
         handleUpdateProduct(product) {
         this.$refs.postProductForm.populateForm(product); 
+        }, 
+
+        async getCategories() {
+            let response = await fetch("https://projekt-webbtjanst-api-hanin-96.onrender.com/categories", {
+                method: 'GET',
+                credentials: 'include'
+            });
+
+
+            let data = await response.json();
+            console.log(data);
+            this.categories = data;
         },
+
+        //filtereing på kategori
+        filterByCategory() {
+            console.log("kategori:" + this.selectedCategory); //visar kategorins namn
+            if(this.selectedCategory === "") {
+                this.filteredProducts = this.products;
+            } else {
+                //filtrerar produkter baserat på selectedCategory. loopar igenom kategoriarr i produkten
+                this.filteredProducts = this.products.filter(product => {
+                    return product.category.some(category => category.category_name === this.selectedCategory);
+                });
+            }
+        }
     }, 
 
     mounted() {
         this.getProducts();
+        this.getCategories(); 
     }
 }
 </script>
