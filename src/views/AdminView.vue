@@ -9,7 +9,8 @@
             <div class="main-content-wrap flex h-min bg-light-green w-full max-w-7xl mx-auto pb-20 justify-between">
                 <!--Här kan vi lägga in kompontent för hämtning av lager produkter-->
                     <div class="p-4 relative top-10 max-w-xl">
-                        <input type="search" class="bg-white w-full mb-4 p-2 rounded-lg" placeholder="Sök" @input="onFilterSearch" v-model="searchValue" />
+                        <input type="search" class="bg-white w-full mb-4 p-2 rounded-lg" placeholder="Sök efter produkt" @input="onFilterSearch" v-model="searchValue" />
+                        <p v-if="filteredProducts.length === 0" class="searchResult">{{ errorSearchMsg }}</p>
                         <div class="product-">
                         <Products @deleteProduct="deleteProduct(product._id)" @updateProduct="handleUpdateProduct" v-for="product in filteredProducts" :product="product" :key="product._id" class="produktkort w-full max-w-full shadow-xl rounded-lg"/>
                         <LoadingSpinner :loadingSpinner="isLoading" />
@@ -38,7 +39,8 @@ export default {
             products: [],
             filteredProducts: [],
             isLoading: false,
-            searchValue: ""
+            searchValue: "",
+            errorSearchMsg: ""
         }
     },
     //hämtar in komponent för login
@@ -49,6 +51,7 @@ export default {
         PostProduct,
         LoadingSpinner
     }, 
+   
     methods: {
         //Funktion för att hämta in data
         async getProducts() {
@@ -61,7 +64,7 @@ export default {
             this.isLoading = false;
             let data = await response.json(); 
 
-            console.log(data); 
+            //console.log(data); 
             //Sortera data efter alfabetisk ordning
             let sortedData = data;
             sortedData = sortedData.sort((a, b) => {
@@ -79,20 +82,26 @@ export default {
             this.products = data;
             this.filteredProducts = this.products;
         }, 
-        //Searchbar för filtrering av produkter efter produktnamn
-        onFilterSearch(event) {
-            this.searchValue = event.target.value;
-            if( this.searchValue.trim()==="") {
+         //Searchbar för filtrering av produkter efter produktnamn
+        onFilterSearch() {
+            if (this.searchValue.trim() === "") {
                 this.filteredProducts = this.products;
+                this.errorSearchMsg = "";
                 return;
             } else {
-            this.filteredProducts = this.products.filter((product) => {
-                return product.product_name.toLowerCase().includes( this.searchValue.toLowerCase());
-            });
+                this.filteredProducts = this.products.filter((product) => {
+                    return product.product_name.toLowerCase().includes(this.searchValue.toLowerCase());
+                });
             }
+            if (this.filteredProducts.length === 0) {
+                    this.errorSearchMsg = "Inga produkter hittades";
+                } else {
+                    this.errorSearchMsg = "";
+                }
+            
             
         },
-
+        
         //funktion för att radera produkter
         async deleteProduct(id) {
             this.isLoading = true;
