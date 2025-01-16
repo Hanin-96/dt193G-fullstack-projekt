@@ -23,6 +23,11 @@ const router = createRouter({
       meta: { isAuthenticated : true},
       component: AdminView
     },
+    {
+      path: '/:catchAll(.*)',
+      name: 'admin',
+      redirect: '/admin'
+    },
   ],
 })
 
