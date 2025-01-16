@@ -24,7 +24,7 @@ const router = createRouter({
       component: AdminView
     },
     {
-      path: '/:catchAll(.*)',
+      path: '/:pathMatch(.*)*',
       name: 'not-found',
       redirect: 'admin'
     },
