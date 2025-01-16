@@ -25,8 +25,8 @@ const router = createRouter({
     },
     {
       path: '/:catchAll(.*)',
-      name: 'admin',
-      redirect: '/admin'
+      name: 'not-found',
+      redirect: 'admin'
     },
   ],
 })
