@@ -12,7 +12,7 @@
                         <input type="search" class="bg-white w-full mb-4 p-2 rounded-lg" placeholder="Sök efter produkt" @input="onFilterSearch" v-model="searchValue" />
                         <p v-if="filteredProducts.length === 0" class="searchResult">{{ errorSearchMsg }}</p>
                         <!--Filtrering på kategori-->
-                        <select v-model="selectedCategory" @change="filterByCategory" class="bg-white w-full mb-4 p-2 rounded-lg">
+                        <select v-model="selectedCategory" @change="filterByCategory" class="bg-white w-full mb-4 p-2 rounded-lg text-lg">
                             <option value="">Alla kategorier</option>
                             <option v-for="category in categories" :key="category._id" :value="category.category_name">
                                 {{ category.category_name }}

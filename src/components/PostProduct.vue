@@ -4,16 +4,16 @@
 
 <div class="product-form-wrap bg-white text-dark-grey-text mt-14 p-4 shadow-xl rounded-lg m-auto lg:mr-4 h-fit">
 <form @submit.prevent="addNewProduct()" @submit="checkForm">
-        <fieldset class="mb-4 text-lg font-bold">{{ item.productId ? 'Uppdatera produkt' : 'Lägg till produkt' }}</fieldset>
+        <fieldset class="mb-4 font-bold text-2xl">{{ item.productId ? 'Uppdatera produkt' : 'Lägg till produkt' }}</fieldset>
 
-        <label for="name" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Namn:</label><br>
+        <label for="name" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6 text-lg">Namn:</label><br>
         <span class="error-form-wrap" v-if="errorMsg.productName">
         {{errorMsg.productName}}
         </span>
         <input v-model="item.productName" type="text" name="name" id="name" class="max-w-full w-full mx-auto my-0 p-1 rounded-lg mt-2 mb-6">
         <br>
 
-        <label for="description" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Beskrivning:</label>
+        <label for="description" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6 text-lg">Beskrivning:</label>
         <br>
         <span class="error-form-wrap" v-if="errorMsg.productDescription">
         {{errorMsg.productDescription}}
@@ -22,12 +22,12 @@
         <br> 
 
 
-        <label for="category" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Kategori:</label><br>
+        <label for="category" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6 text-lg">Kategori:</label><br>
 
         <ul>
-            <li v-for="option in options" :key="option._id">
-            <input type="checkbox" :id="option.category_name" :name="option.category_name" :value="option._id" v-model="item.productCategories" class="mr-1">
-            <label :for="option.category_name">{{option.category_name}}</label>
+            <li v-for="option in options" :key="option._id" class="flex items-center">
+            <input type="checkbox" :id="option.category_name" :name="option.category_name" :value="option._id" v-model="item.productCategories" class="mr-1 w-6 h-6 my-3">
+            <label :for="option.category_name" class="text-md">{{option.category_name}}</label>
             </li>
         </ul>
         <span class="error-form-wrap" v-if="errorMsg.productCategories">
@@ -36,13 +36,13 @@
         <br>
         <br>
 
-        <label for="amount" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Antal:</label><br>
+        <label for="amount" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6 text-lg">Antal:</label><br>
         <span class="error-form-wrap" v-if="errorMsg.amount">
         {{errorMsg.amount}}
         </span>
         <input v-model="item.productAmount" type="number" name="amount" id="amount" class="max-w-full w-full mx-auto my-0 p-1 rounded-lg mt-2 mb-6"><br> 
 
-        <label for="price" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6">Pris:</label><br>
+        <label for="price" class="max-w-full w-full mx-auto my-0 p-1.5 rounded-lg mt-2 mb-6 text-lg">Pris:</label><br>
         <span class="error-form-wrap" v-if="errorMsg.price">
         {{errorMsg.price}}
         </span>
@@ -50,7 +50,7 @@
 
         <br>
 
-    <div class="btn-submit-cancel-wrap flex flex-col lg:flex-row gap-4">
+    <div class="btn-submit-cancel-wrap flex flex-col lg:flex-row gap-6">
         <button type="submit" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-light-yellow text-dark-grey-text font-semibold shadow-md cursor-pointer w-full submit-btn">{{ item.productId ? 'Uppdatera' : 'Lägg till' }}</button>
         <button @click="resetForm($event)" type="button" class="max-w-full mx-auto my-0 p-3 rounded-lg bg-orange text-dark-grey-text font-semibold shadow-md cursor-pointer w-full submit-btn">Ångra</button>
         </div>
