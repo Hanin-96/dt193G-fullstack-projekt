@@ -47,6 +47,7 @@ export default {
         }
     },
     methods: {
+        //Post fetch anrop för inloggning av användare
         async loginUser() {
             this.isLoading = true;
 
@@ -80,5 +81,8 @@ export default {
 </script>
 
 <style scoped>
+.error-msg {
+    color: red;
+}
 
 </style>
