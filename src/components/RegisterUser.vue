@@ -108,7 +108,7 @@ export default {
                 this.errMsg = {};
 
             } else {
-                this.useradded = "Användaren kunde inte läggas till"
+                this.useradded = "Kunde inte lägga till användare. Tänk på att du inte kan registrera dig med en mail mer än en gång. Vänligen försök igen!"
             }
 
         },
