@@ -118,6 +118,7 @@ export default {
             this.errMsg = {}; 
             
             let isValid = true; 
+            this.isLoading = false;
 
             if(this.firstname.length < 1) {
                 this.errMsg.firstname = "Du måste ange användarnamn"; 
